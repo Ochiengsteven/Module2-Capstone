@@ -1,3 +1,7 @@
+const projectId = '4u0VrRiLUtdCxXpkdeya';
+// eslint-disable-next-line no-unused-vars
+const baseUrl = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/${projectId}`;
+
 export async function fetchCharacterData() {
   const url = 'https://rickandmortyapi.com/api/character';
   const response = await fetch(url);
