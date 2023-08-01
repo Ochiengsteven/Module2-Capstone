@@ -22,5 +22,3 @@ export async function getCharacterImagesAndIds() {
   }));
   return characterInfo;
 }
-
-getCharacterImagesAndIds();
