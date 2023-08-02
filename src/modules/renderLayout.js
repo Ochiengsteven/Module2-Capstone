@@ -133,7 +133,7 @@ export default function renderLayout() {
   <h3>Comments</h3>
   </div>
   <h3>Add a comment</h3>
-  <form action="">
+  <form action="" id="myForm">
       <div><input type="text" id="name" placeholder="Your name"></div>
       <div><textarea type="text" id="comments" placeholder="Your insights" rows="4" maxlength="500"></textarea></div>
       <button type="submit" class="submitComment">Comment</button>
@@ -149,6 +149,27 @@ export default function renderLayout() {
           modal.style.display = 'none';
           overlay.style.display = 'none';
           document.body.classList.remove('popup-active');
+        });
+        const formBtn = document.querySelector('.submitComment');
+        updateComment(id);
+        formBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const nameInput = document.getElementById('name').value;
+          const commentInput = document.getElementById('comments').value;
+          if (nameInput && commentInput) {
+            await postComment(id, nameInput, commentInput);
+            document.getElementById('myForm').reset();
+          } else {
+            formBtn.insertAdjacentHTML(
+              'afterend',
+              '<p class="error-msg">Please enter a valid title and author<p>',
+            );
+            setTimeout(() => {
+              const errorMsg = document.querySelector('.error-msg');
+              errorMsg.remove();
+            }, 3000);
+          }
+          addComment(id);
         });
       });
     });
