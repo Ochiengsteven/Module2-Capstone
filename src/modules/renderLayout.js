@@ -1,6 +1,6 @@
 import { getCharacterImagesAndIds } from './fetchApi.js';
-import like from '../assets/like.png';
 import logo from '../assets/logo1.png';
+import { fetchLike, postLike } from './likesCounter.js';
 
 getCharacterImagesAndIds();
 export default function renderLayout() {
@@ -13,9 +13,38 @@ export default function renderLayout() {
 
   // Create the basic layout of each character card
   const createCharacterCard = (character) => {
+    // character.likes = 0;
+
+    // Retrieve the likes count from localStorage if it exists
+    const storedLikes = localStorage.getItem(`likes_${character.id}`);
+    character.likes = storedLikes ? parseInt(storedLikes, 10) : 0;
     // Create the like image
-    const likeImg = new Image();
-    likeImg.src = like;
+    const likeImg = document.createElement('h2');
+    likeImg.classList.add('likes');
+    likeImg.innerHTML = '<i class="fa fa-heart-o"></i>';
+
+    const likesCount = document.createElement('p');
+    likesCount.textContent = `${character.likes} likes`;
+
+    likeImg.addEventListener('click', async () => {
+      try {
+        // Remove the event listener to prevent further clicks
+        likeImg.classList.toggle('liked');
+        // Call the postLike function to add a like for the character
+        await postLike(character.id);
+
+        // Update the likes count on the card
+        character.likes += 1; // Increase the likes count in the character object
+        // Fetch the latest like count from the API
+        const updatedLikes = await fetchLike();
+        const characterLikes = updatedLikes.find((item) => item.item_id === character.id);
+        likesCount.textContent = `${characterLikes.likes} likes`; // Update the likes count element
+        localStorage.setItem(`likes_${character.id}`, characterLikes.likes);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error adding like:', error);
+      }
+    });
 
     const card = document.createElement('div');
     card.classList.add('card');
@@ -40,8 +69,6 @@ export default function renderLayout() {
 
     const cardDescription = document.createElement('div');
     cardDescription.classList.add('card-description');
-    const likesCount = document.createElement('p');
-    likesCount.textContent = '5 likes';
     const countDiv = document.createElement('div');
     countDiv.classList.add('count-div');
     countDiv.appendChild(likesCount);
