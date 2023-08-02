@@ -4,11 +4,14 @@ const updateComment = async (id) => {
   // get comments data from API
   const displayComments = await getComment(id);
   const comments = document.querySelector('.comments');
-  if (!(displayComments.error)) {
+  if (!displayComments.error) {
     displayComments.forEach((data) => {
-      comments.insertAdjacentHTML('beforeend', `
+      comments.insertAdjacentHTML(
+        'beforeend',
+        `
         <p class="comment-text">${data.creation_date} ${data.username}: ${data.comment}</p>
-        `);
+        `,
+      );
     });
   }
 };
@@ -17,11 +20,16 @@ const addComment = async (id) => {
   // Add last comment data from API
   const displayComments = await getComment(id);
   const comments = document.querySelector('.comments');
-  if (!(displayComments.error)) {
-    comments.insertAdjacentHTML('beforeend', `
-          <p class="comment-text">${displayComments.pop().creation_date} ${displayComments.pop().username}: ${displayComments.pop().comment}</p>
-          `);
-  }
+  comments.insertAdjacentHTML(
+    'beforeend',
+    `
+          <p class="comment-text">${
+  displayComments[displayComments.length - 1].creation_date
+} ${displayComments[displayComments.length - 1].username}: ${
+  displayComments[displayComments.length - 1].comment
+}</p>
+          `,
+  );
 };
 
 export { updateComment, addComment };
