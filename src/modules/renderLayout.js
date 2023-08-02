@@ -67,6 +67,64 @@ export default function renderLayout() {
       const characterCard = createCharacterCard(character); // add the earlier created card layout.
       characterContainer.appendChild(characterCard); // append the card to the container.
     });
+
+    // opening comment popup page
+    const commentBtn = document.querySelectorAll('.comment-button');
+
+    commentBtn.forEach((e) => {
+      e.addEventListener('click', async () => {
+        // finding index
+        const id = [].indexOf.call(
+          e.parentNode.parentNode.parentNode.parentNode.childNodes,
+          e.parentNode.parentNode.parentNode,
+        );
+
+        const modal = document.getElementById('comment-modal');
+        const overlay = document.createElement('comment-overlay');
+        overlay.classList.add('popup-overlay');
+        modal.parentNode.insertBefore(overlay, modal);
+
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+        document.body.classList.add('popup-active');
+        modal.innerHTML = '';
+        const popupContainer = document.createElement('div');
+        popupContainer.classList.add('popup-container');
+        popupContainer.innerHTML = `
+  <div class="comment-container">
+      <img src="${characters[id].image}" id="picture" alt="">
+      <button class="closeBtn"><i class="fa fa-close"></i></button>
+  <h2>${characters[id].name}</h2>
+  <ul class="character-info">
+      <li>ID: ${characters[id].id}</li>
+      <li>Species: ${characters[id].species}</li>
+      <li>Gender: ${characters[id].gender}</li>
+      <li>Status: ${characters[id].status}</li>
+  </ul>
+  <section>
+  <div class="comments">
+  <h3>Comments</h3>
+  </div>
+  <h3>Add a comment</h3>
+  <form action="">
+      <div><input type="text" id="name" placeholder="Your name"></div>
+      <div><textarea type="text" id="comments" placeholder="Your insights" rows="4" maxlength="500"></textarea></div>
+      <button type="submit" class="submitComment">Comment</button>
+  </form>
+  </section>
+</div>
+  `;
+        modal.append(popupContainer);
+
+        // closing comment popup
+        const closeBtn = document.querySelector('.closeBtn');
+        closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+          overlay.style.display = 'none';
+          document.body.classList.remove('popup-active');
+        });
+      });
+    });
   };
 
   appendCharacterCards();
