@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { getCharacterImagesAndIds } from './fetchApi.js';
 import logo from '../assets/logo1.png';
 import { fetchLike, postLike } from './likesCounter.js';
