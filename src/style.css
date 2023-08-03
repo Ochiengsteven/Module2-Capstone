@@ -76,10 +76,14 @@ footer {
   justify-content: space-between;
 }
 
-.card-title img {
-  height: 24px;
-  width: 24px;
-  margin-right: 10%;
+.likes {
+  font-size: 26px;
+  margin-right: 1.6rem;
+  cursor: pointer;
+}
+
+.likes.liked {
+  color: red;
 }
 
 .card-description {

@@ -1,10 +1,13 @@
-import { getCharacterImagesAndIds, postComment } from './fetchApi.js';
-
-import { updateComment, addComment } from './showComments.js';
-import like from '../assets/like.png';
+/* eslint-disable no-undef */
+import { getCharacterImagesAndIds } from './fetchApi.js';
 import logo from '../assets/logo1.png';
+import { fetchLike, postLike } from './likesCounter.js';
+import { updateComment, addComment } from './showComments.js';
 
 getCharacterImagesAndIds();
+const getLikes = await fetchLike();
+getLikes.sort((a, b) => a.item_id - b.item_id);
+
 export default function renderLayout() {
   // Create header with logo
   const logoImg = new Image();
@@ -15,9 +18,28 @@ export default function renderLayout() {
 
   // Create the basic layout of each character card
   const createCharacterCard = (character) => {
-    // Create the like image
-    const likeImg = new Image();
-    likeImg.src = like;
+    const likes = getLikes.map((item) => item.likes);
+
+    // Create the like icon
+    const likeImg = document.createElement('h2');
+    likeImg.classList.add('likes');
+    likeImg.innerHTML = '<i class="fa fa-heart-o"></i>';
+
+    const likesCount = document.createElement('p');
+    likesCount.textContent = `${likes[character.id - 1]} likes`;
+
+    likeImg.addEventListener('click', async () => {
+      try {
+        likeImg.classList.toggle('liked');
+
+        await postLike(character.id - 1);
+
+        likesCount.textContent = `${likes[character.id - 1] + 1} likes`; // Update the likes count element
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error adding like:', error);
+      }
+    });
 
     const card = document.createElement('div');
     card.classList.add('card');
@@ -42,8 +64,6 @@ export default function renderLayout() {
 
     const cardDescription = document.createElement('div');
     cardDescription.classList.add('card-description');
-    const likesCount = document.createElement('p');
-    likesCount.textContent = '5 likes';
     const countDiv = document.createElement('div');
     countDiv.classList.add('count-div');
     countDiv.appendChild(likesCount);
