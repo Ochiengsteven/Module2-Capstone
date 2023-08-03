@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { getCharacterImagesAndIds } from './fetchApi.js';
 import logo from '../assets/logo1.png';
+import countComments from './countComments.js';
 import { fetchLike, postLike } from './likesCounter.js';
 import { updateComment, addComment } from './showComments.js';
 
@@ -125,7 +126,7 @@ export default function renderLayout() {
   </ul>
   <section>
   <div class="comments">
-  <h3>Comments</h3>
+  <h3 class = "commentsTitle">Comments</h3>
   </div>
   <h3>Add a comment</h3>
   <form action="" id="myForm">
@@ -137,6 +138,8 @@ export default function renderLayout() {
 </div>
   `;
         modal.append(popupContainer);
+
+        countComments();
 
         // closing comment popup
         const closeBtn = document.querySelector('.closeBtn');

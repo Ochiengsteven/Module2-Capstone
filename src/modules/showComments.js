@@ -1,4 +1,5 @@
 import { getComment } from './fetchApi.js';
+import countComments from './countComments.js';
 
 const updateComment = async (id) => {
   // get comments data from API
@@ -30,6 +31,7 @@ const addComment = async (id) => {
 }</p>
           `,
   );
+  countComments();
 };
 
 export { updateComment, addComment };
