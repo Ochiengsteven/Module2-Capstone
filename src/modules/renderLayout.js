@@ -5,7 +5,6 @@ import countComments from './countComments.js';
 import { fetchLike, postLike } from './likesCounter.js';
 import { updateComment, addComment } from './showComments.js';
 
-
 getCharacterImagesAndIds();
 const getLikes = await fetchLike();
 getLikes.sort((a, b) => a.item_id - b.item_id);
