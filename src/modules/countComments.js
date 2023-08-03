@@ -6,4 +6,6 @@ export default function countComments() {
     const countAll = document.querySelectorAll('.comment-text').length;
     comments.insertAdjacentHTML('beforeend', `Comments (${countAll})`);
   }, 2000);
+
+  return document.querySelectorAll('.comment-text').length;
 }
