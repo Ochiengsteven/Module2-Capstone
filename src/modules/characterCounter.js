@@ -3,7 +3,6 @@ import { getCharacterImagesAndIds } from './fetchApi.js'; // Replace './your/api
 export default async function countCharactersAndUpdateDOM() {
   const characterData = await getCharacterImagesAndIds();
   const numberOfCharacters = characterData.length;
-  console.log(numberOfCharacters);
   const characterCountElement = document.querySelector('.items');
   characterCountElement.textContent = `Characters (${numberOfCharacters})`;
 }
