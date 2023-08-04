@@ -59,11 +59,12 @@ Module-2-Capstone is the capstone project for module 2. We used an external API 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+<!--
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 
 - [Demo](https://ochiengsteven.github.io/Module2-Capstone/)
+-->
 
 ## 💻 Getting Started
 
