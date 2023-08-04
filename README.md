@@ -59,6 +59,11 @@ Module-2-Capstone is the capstone project for module 2. We used an external API 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Capstone Project Presentation
+
+[![Capstone Project Presentation](https://img.youtube.com/vi/2dy4XzL0sOI/0.jpg)](https://www.youtube.com/watch?v=2dy4XzL0sOI)
+
+
 <!--
 ## 🚀 Live Demo <a name="live-demo"></a>
 
