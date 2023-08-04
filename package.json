@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "webpack",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Ochiengsteven/Module2-Capstone/issues"
   },
-  "homepage": "https://github.com/Ochiengsteven/Module2-Capstone#readme",
+  "homepage": "https://Ochiengsteven.github.io/Module2-Capstone",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.22.5",
     "babel-eslint": "^10.1.0",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "css-loader": "^6.8.1",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.3",
     "jest-environment-jsdom": "^29.6.2",
     "style-loader": "^3.3.3",
