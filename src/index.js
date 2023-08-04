@@ -5,6 +5,8 @@ import './style.css';
 
 renderLayout();
 
+countCharactersAndUpdateDOM();
+
 document.addEventListener('DOMContentLoaded', async () => {
   await countCharactersAndUpdateDOM();
 });
